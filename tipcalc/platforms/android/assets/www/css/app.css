@@ -6,6 +6,10 @@
     min-width: 150px;
 }
 
+.version {
+    text-align:center;
+    font-size:small;
+}
 .totals {
     color: #080;
 }

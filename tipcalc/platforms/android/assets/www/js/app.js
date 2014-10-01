@@ -30,9 +30,10 @@
         //alert('Save packed:' + val);
         //Unpack into array
         tipPercents = UnPackPercentages(val);
-        
-        localStorage.setItem('tipPercentage', PackPercentages(tipPercents));
-        //tipPercent = tipPct;
+        var packedVals = PackPercentages(tipPercents);
+        localStorage.setItem('tipPercentage', packedVals);
+        //Put back on screen
+        $('#tipPercentages').val(packedVals)
         window.history.back();
     };
 
@@ -40,11 +41,20 @@
         //debugger;
         var ret = new Array();
         var vals = new Array();
-        var val = 0.0;
+        var index;
         vals = packedVal.split(',');
         if (vals) {
-            for (val in vals) {
-                ret.push(parseFloat(vals[val]));
+            for (index in vals) {
+                try
+                {
+                    var fltVal = parseFloat(vals[index]);
+                }
+                catch (err) {
+                    //ignore badly formatted entries
+                }
+                if (fltVal) {
+                        ret.push(fltVal);
+                    }
             }
         }
         return (ret);
